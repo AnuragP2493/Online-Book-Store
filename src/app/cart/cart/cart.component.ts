@@ -20,4 +20,8 @@ export class CartComponent implements OnInit {
     this.router.navigate(['/billing']);
   }
 
+  RemoveCart(id: string): void{
+    this.cartService.removeFromCart(id);
+  }
+
 }
