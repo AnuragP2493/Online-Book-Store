@@ -1,0 +1,27 @@
+<mat-card *ngIf="selectedBook">
+    <mat-card-header>
+      <mat-card-title>{{selectedBook.volumeInfo?.title}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{selectedBook.volumeInfo.imageLinks?.smallThumbnail}}">
+    <div>
+       <p>Rating: {{selectedBook.volumeInfo.averageRating}}</p>
+        <p>Publisher: {{selectedBook.volumeInfo.publisher}}</p>
+        <p>Page Count: {{selectedBook.volumeInfo.pageCount}}</p>
+        <p>Language: {{selectedBook.volumeInfo.language}}</p>
+    </div>
+    <mat-card-content>
+      <p>
+        {{selectedBook.volumeInfo.description}}
+      </p>
+      <p>Written By: </p>
+      <p>{{selectedBook.volumeInfo.publisher}}</p>
+
+      <br>
+      
+   <button mat-flat-button color="accent" (click)="addToCart()">ADD TO CART</button>
+  <button mat-flat-button color="accent" >BUY</button> 
+    </mat-card-content>
+  </mat-card>
+  
+  
+  

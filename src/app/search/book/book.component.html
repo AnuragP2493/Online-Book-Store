@@ -1,0 +1,20 @@
+<div *ngIf="book">
+<mat-card >
+  <mat-card-header>
+    <mat-card-title>{{book.volumeInfo.title}}</mat-card-title>
+    <mat-card-subtitle>by {{book.volumeInfo.authors[0]}}</mat-card-subtitle>
+  </mat-card-header>
+  <div mat-card-image class="imgBox">
+      <img [src]="book.volumeInfo.imageLinks.smallThumbnail" alt="">
+  </div>
+  <mat-card-content>
+      Published by :- <br>
+      {{book.volumeInfo.publisher}}
+    <!-- <img src="boo" alt=""> -->
+  </mat-card-content>
+  <!-- <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions> -->
+</mat-card>
+</div>

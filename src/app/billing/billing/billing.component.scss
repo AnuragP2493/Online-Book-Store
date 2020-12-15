@@ -1,0 +1,18 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card {
+  width: 85% !important;
+  margin: auto;
+}
+
+button {
+  margin: 10px;
+  margin-left: 10%;
+}
+
+.example-card {
+  margin-top: 20px;
+}
