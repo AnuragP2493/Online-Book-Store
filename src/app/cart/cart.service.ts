@@ -17,4 +17,10 @@ export class CartService {
     this.books.push(book);
     this.cartItems.next(this.books);
   }
+
+  removeFromCart(id: string): void {
+   this.books = this.books.filter(book => book.id !== id);
+   this.cartItems.next(this.books);
+  }
 }
+

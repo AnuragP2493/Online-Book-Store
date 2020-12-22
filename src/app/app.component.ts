@@ -1,3 +1,4 @@
+import { BooksFacade } from 'src/app/store/books.fascade';
 import { CartService } from './cart/cart.service';
 import { Component } from '@angular/core';
 
@@ -9,9 +10,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   cartItems = 3;
   title = 'google-books';
-  constructor(private cartService: CartService){
-     this.cartService.cartItems$.subscribe(data => {
-       this.cartItems = data.length;
-     });
+  constructor(private bookFascade: BooksFacade){
+
+     this.bookFascade.cartItems$.subscribe(data => {
+      this.cartItems = data.length;
+    });
   }
 }

@@ -1,0 +1,37 @@
+<div *ngIf="collection$ | async as collection">
+
+    <div class="container" *ngFor="let selectedBook of collection">
+        <mat-card *ngIf="selectedBook">
+            <div class="header">
+            <mat-card-header>
+              <mat-card-title>{{selectedBook.volumeInfo?.title}}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="{{selectedBook.volumeInfo.imageLinks?.smallThumbnail}}">
+        </div>
+            <div>
+               <p>Rating: {{selectedBook.volumeInfo.averageRating}}</p>
+                <p>Publisher: {{selectedBook.volumeInfo.publisher}}</p>
+                <p>Page Count: {{selectedBook.volumeInfo.pageCount}}</p>
+                <p>Language: {{selectedBook.volumeInfo.language}}</p>
+            </div>
+            <mat-card-content>
+              <p>
+                {{selectedBook.volumeInfo.description}}
+              </p>
+              <p>Written By: </p>
+              <p>{{selectedBook.volumeInfo.publisher}}</p>
+        
+              <hr>
+              <div *ngIf="User$| async as user">
+              <h2>Billed For</h2>
+              <div><span>Name -</span>{{user.name}}</div>
+              <div><span>Email -</span>{{user.email}}</div>
+              <div><span>Mobile -</span>{{user.mobile}}</div>
+              <div><span>Address -</span>{{user.address}}</div>
+            </div>
+        
+            </mat-card-content>
+          </mat-card>
+    
+    </div>
+    </div>

@@ -1,4 +1,4 @@
-<mat-card *ngIf="selectedBook">
+<mat-card *ngIf="selectedBook$ |async as selectedBook">
     <mat-card-header>
       <mat-card-title>{{selectedBook.volumeInfo?.title}}</mat-card-title>
     </mat-card-header>

@@ -4,6 +4,15 @@ export interface SearchBook {
   items: Book[];
 }
 
+export interface User {
+  name: string;
+  email: string;
+  mobile: string;
+  address: string;
+
+
+}
+
 export interface Book {
   kind: string;
   id: string;

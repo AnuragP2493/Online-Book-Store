@@ -1,6 +1,6 @@
 
 
-<div class="container" *ngFor="let selectedBook of cartItems">
+<div class="container" *ngFor="let selectedBook of cartItems$|async">
     <mat-card *ngIf="selectedBook">
         <div class="header">
         <mat-card-header>
@@ -23,7 +23,8 @@
     
           <br>
           
-       <button mat-flat-button color="accent" (click)="toBuy()">Proceed To Buy</button>
+       <button mat-flat-button color="accent" (click)="toBuy(selectedBook)">Proceed To Buy</button>
+       <button  mat-flat-button color="accent" (click)="RemoveCart(selectedBook.id)">Remove From Cart</button>
     
         </mat-card-content>
       </mat-card>
