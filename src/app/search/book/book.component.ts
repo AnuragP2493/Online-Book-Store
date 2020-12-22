@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Book } from '../search.interface';
 
 @Component({
@@ -13,4 +13,5 @@ export class BookComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 }

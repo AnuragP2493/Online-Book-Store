@@ -8,8 +8,9 @@
     
 </form>
 
-<div class="book-container" *ngIf="searchData">
-  <div *ngFor="let item of searchData.items">
+
+<div class="book-container" *ngIf="searchData$|async as searchData">
+  <div *ngFor="let item of searchData">
   <div class="book">
    <app-book [book]="item" (click)="onDetail(item.id)"></app-book>
   </div>

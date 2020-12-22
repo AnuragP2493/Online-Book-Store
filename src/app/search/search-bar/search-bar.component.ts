@@ -1,8 +1,10 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
-import { SearchBook } from '../search.interface';
-
+import { BooksFacade } from 'src/app/store/books.fascade';
+import { Book, SearchBook } from '../search.interface';
 import { BooksService } from './../books.service';
+import { constants } from 'buffer';
 
 @Component({
   selector: 'app-search-bar',
@@ -11,26 +13,18 @@ import { BooksService } from './../books.service';
 })
 export class SearchBarComponent implements OnInit {
 
-  searchData: SearchBook ;
+  searchData$: Observable<Book[]> ;
   searchTerm = '';
-  constructor(private bookSearvice: BooksService , private router: Router) { }
+  constructor( private router: Router , private bookFascade: BooksFacade) { }
 
   ngOnInit(): void {
-    this.searchTerm = this.bookSearvice.searchTerm;
-    if (this.searchTerm){
-      this.bookSearvice.allBooks$.subscribe(data => {
-      this.searchData = data;
-      });
-    }
+    this.searchData$ = this.bookFascade.AllBooks$;
+    this.bookFascade.searchTerm$.subscribe(data => this.searchTerm = data);
+
   }
 
   searchBook(value: string): void{
-    this.searchTerm = value ;
-    this.bookSearvice.searchTerm = value;
-    this.bookSearvice.getAllBooks(value);
-    this.bookSearvice.allBooks$.subscribe(data => {
-      this.searchData = data ;
-    });
+    this.bookFascade.loadBooks({searchTerm: value});
   }
 
   onDetail(id: string): void {

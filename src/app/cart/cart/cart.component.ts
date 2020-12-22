@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { BooksFacade } from 'src/app/store/books.fascade';
 import { CartService } from './../cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -9,19 +11,24 @@ import { Book } from 'src/app/search/search.interface';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  cartItems: Book[] = [];
-  constructor(private cartService: CartService , private router: Router) { }
+  cartItems$: Observable<Book[]>;
+  constructor(private cartService: CartService, private bookFascade: BooksFacade , private router: Router) { }
 
   ngOnInit(): void {
-     this.cartService.cartItems$.subscribe(data => this.cartItems = data);
+     this.cartItems$ = this.bookFascade.cartItems$;
   }
 
-  toBuy(): void{
+  toBuy(book): void{
+    this.bookFascade.addToCollection({book});
     this.router.navigate(['/billing']);
   }
 
   RemoveCart(id: string): void{
     this.cartService.removeFromCart(id);
+<<<<<<< HEAD
+=======
+    this.bookFascade.removeFromCart(id);
+>>>>>>> 217c2cb
   }
 
 }
