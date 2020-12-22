@@ -24,11 +24,7 @@ export class CartComponent implements OnInit {
   }
 
   RemoveCart(id: string): void{
-    this.cartService.removeFromCart(id);
-<<<<<<< HEAD
-=======
     this.bookFascade.removeFromCart(id);
->>>>>>> 217c2cb
   }
 
 }
