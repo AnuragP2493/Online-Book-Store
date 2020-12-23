@@ -17,11 +17,8 @@ import * as bookReducer from './store/books.reducer';
 import { BooksFacade } from './store/books.fascade';
 import { reducers } from './store/books.selector';
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,12 +26,14 @@ import { reducers } from './store/books.selector';
     BrowserAnimationsModule,
     NgbModule,
     HttpClientModule,
-    // StoreModule.forRoot({book :bookReducer.reducer}, {}),
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([BooksEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [BooksFacade],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

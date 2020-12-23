@@ -1,11 +1,8 @@
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { BooksFacade } from 'src/app/store/books.fascade';
 import {  Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { BooksService } from './../books.service';
-import { CartService } from './../../cart/cart.service';
-import { Book, SearchBook} from '../search.interface';
+import { Book} from '../search.interface';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -15,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class BookDetailComponent implements OnInit {
   selectedBook$: Observable<Book>;
-  constructor(private activateRoute: ActivatedRoute , private router: Router ,  private booksFacade : BooksFacade) {
+  constructor(private activateRoute: ActivatedRoute , private router: Router ,  private booksFacade: BooksFacade) {
 }
 
   ngOnInit(): void {
@@ -23,9 +20,10 @@ export class BookDetailComponent implements OnInit {
     this.activateRoute.params.subscribe(data => {
       bookId = data.id;
     }) ;
-    this.selectedBook$ =  this.booksFacade.AllBooks$.pipe(
-      map(books => books.filter(book =>  book.id === bookId)[0]));
-
+    if (bookId) {
+        this.selectedBook$ =  this.booksFacade.AllBooks$.pipe(
+        map(books => books.filter(book =>  book.id === bookId)[0]));
+    }
   }
 
   addToCart(): void{
@@ -33,8 +31,8 @@ export class BookDetailComponent implements OnInit {
   }
 
   toBuy(): void{
-    this.router.navigate(['/billing']);
     this.selectedBook$.subscribe(data => this.booksFacade.addToCollection({book: data}));
+    this.router.navigate(['/billing']);
   }
 
 }

@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs';
 import { BooksFacade } from 'src/app/store/books.fascade';
-import { CartService } from './../cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Book } from 'src/app/search/search.interface';
@@ -12,7 +11,7 @@ import { Book } from 'src/app/search/search.interface';
 })
 export class CartComponent implements OnInit {
   cartItems$: Observable<Book[]>;
-  constructor(private cartService: CartService, private bookFascade: BooksFacade , private router: Router) { }
+  constructor( private bookFascade: BooksFacade , private router: Router) { }
 
   ngOnInit(): void {
      this.cartItems$ = this.bookFascade.cartItems$;

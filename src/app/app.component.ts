@@ -1,18 +1,18 @@
 import { BooksFacade } from 'src/app/store/books.fascade';
-import { CartService } from './cart/cart.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   cartItems = 3;
   title = 'google-books';
-  constructor(private bookFascade: BooksFacade){
+  constructor(private bookFascade: BooksFacade) {}
 
-     this.bookFascade.cartItems$.subscribe(data => {
+  ngOnInit(): void {
+    this.bookFascade.cartItems$.subscribe((data) => {
       this.cartItems = data.length;
     });
   }
