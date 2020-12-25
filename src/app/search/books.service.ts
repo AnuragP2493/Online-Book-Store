@@ -9,9 +9,9 @@ import { SearchBook } from '../search/search.interface';
 export class BooksService {
   constructor(private http: HttpClient) {}
 
-  getAllBooks(id): Observable<SearchBook> {
+  getAllBooks(searchTerm: string): Observable<SearchBook> {
     return this.http.get<SearchBook>(
-      'https://www.googleapis.com/books/v1/volumes?q=' + id
+      'http://localhost:5000/api/books/' + searchTerm
     );
   }
 }

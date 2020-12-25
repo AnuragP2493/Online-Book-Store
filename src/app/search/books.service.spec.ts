@@ -98,7 +98,7 @@ describe('BooksService', () => {
     });
 
     const req = httpTestingController.expectOne(
-      'https://www.googleapis.com/books/v1/volumes?q=java'
+      'http://localhost:5000/api/books/java'
     );
 
     expect(req.request.method).toEqual('GET');
