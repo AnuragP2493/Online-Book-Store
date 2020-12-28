@@ -1,6 +1,6 @@
-import { Book } from 'src/app/search/search.interface';
+import { Book } from '../shared/search.interface';
 import { Store, StoreModule } from '@ngrx/store';
-import { BooksFacade } from 'src/app/store/books.fascade';
+import { BooksFacade } from './books.fascade';
 import { inject, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { reducers } from './books.selector';

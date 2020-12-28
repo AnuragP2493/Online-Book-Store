@@ -1,4 +1,4 @@
-import { BooksFacade } from 'src/app/store/books.fascade';
+import { BooksFacade } from '../../store/books.fascade';
 import { reducers } from './../../store/books.selector';
 import { StoreModule } from '@ngrx/store';
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';

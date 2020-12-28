@@ -1,34 +1,32 @@
 import { StoreModule } from '@ngrx/store';
-import { BooksFacade } from 'src/app/store/books.fascade';
+import { BooksFacade } from '../../store/books.fascade';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 
 import { BookDetailComponent } from './book-detail.component';
-import { reducers } from 'src/app/store/books.selector';
-import { Observable , of } from 'rxjs';
+import { reducers } from '../../store/books.selector';
+import { Observable, of } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 describe('BookDetailComponent', () => {
   let component: BookDetailComponent;
   let fixture: ComponentFixture<BookDetailComponent>;
-  let book ;
+  let book;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports : [RouterTestingModule,
-        StoreModule.forRoot(reducers)
-      ],
-      declarations: [ BookDetailComponent ],
-      providers : [BooksFacade ,
+      imports: [RouterTestingModule, StoreModule.forRoot(reducers)],
+      declarations: [BookDetailComponent],
+      providers: [
+        BooksFacade,
         {
           provide: ActivatedRoute,
           useValue: {
-            params: of({id: '0BSOg0oHhZ0C'}),
+            params: of({ id: '0BSOg0oHhZ0C' }),
           },
         },
-      ]
-    })
-    .compileComponents();
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -42,7 +40,7 @@ describe('BookDetailComponent', () => {
         etag: 'sWJBeRbxMK0',
         selfLink: 'https://www.googleapis.com/books/v1/volumes/0BSOg0oHhZ0C',
         volumeInfo: {
-          authors : ['sfs' , 'sfsf'],
+          authors: ['sfs', 'sfsf'],
           title: 'Angular Momentum in Quantum Mechanics',
           publisher: 'Princeton University Press',
           publishedDate: '1996',
@@ -69,7 +67,11 @@ describe('BookDetailComponent', () => {
           canonicalVolumeLink:
             'https://books.google.com/books/about/Angular_Momentum_in_Quantum_Mechanics.html?hl=&id=0BSOg0oHhZ0C',
         },
-        saleInfo: { country: 'IN', saleability: 'NOT_FOR_SALE', isEbook: false },
+        saleInfo: {
+          country: 'IN',
+          saleability: 'NOT_FOR_SALE',
+          isEbook: false,
+        },
         accessInfo: {
           country: 'IN',
           viewability: 'PARTIAL',
@@ -91,8 +93,8 @@ describe('BookDetailComponent', () => {
           textSnippet:
             '<b>Angular</b> Momentum of a System of Particles PRELIMINARY REMARKS . In <br>\nclassical mechanics the <b>angular</b> momentum of a system of n particles relative to a <br>\npoint 0 is given by ( 2.2.1 ) 1 = įt : X : = ΣΙ . where Ii , Pi , and L ; are the position <br>\nvector&nbsp;...',
         },
-      }
-  ];
+      },
+    ];
   });
 
   it('should create', () => {
@@ -102,47 +104,42 @@ describe('BookDetailComponent', () => {
   it('should set all books count', inject(
     [BooksFacade],
     (facade: BooksFacade) => {
-      facade.AllBooks$ = new Observable(obs => {
+      facade.AllBooks$ = new Observable((obs) => {
         obs.next(book);
         obs.complete();
       });
       component.ngOnInit();
       fixture.detectChanges();
-      component.selectedBook$.subscribe(data => {
+      component.selectedBook$.subscribe((data) => {
         expect(data).toEqual(book[0]);
       });
+    }
+  ));
 
-  }));
-
-  it('should add book to cart', inject(
-    [BooksFacade],
-    (facade: BooksFacade) => {
-      const spy = spyOn(facade, 'addToCart');
-      component.selectedBook$ = new Observable(obs => {
-        obs.next(book[0]);
-        obs.complete();
-      });
-      component.addToCart();
-      fixture.detectChanges();
-      expect(spy).toHaveBeenCalledWith({book : book[0]});
-
+  it('should add book to cart', inject([BooksFacade], (facade: BooksFacade) => {
+    const spy = spyOn(facade, 'addToCart');
+    component.selectedBook$ = new Observable((obs) => {
+      obs.next(book[0]);
+      obs.complete();
+    });
+    component.addToCart();
+    fixture.detectChanges();
+    expect(spy).toHaveBeenCalledWith({ book: book[0] });
   }));
 
   it('on buy should navigate to biling and add it to collection', inject(
-    [BooksFacade , Router],
-    (facade: BooksFacade , router: Router ) => {
-      const spy1 = spyOn(router , 'navigate');
+    [BooksFacade, Router],
+    (facade: BooksFacade, router: Router) => {
+      const spy1 = spyOn(router, 'navigate');
       const spy = spyOn(facade, 'addToCollection');
-      component.selectedBook$ = new Observable(obs => {
+      component.selectedBook$ = new Observable((obs) => {
         obs.next(book[0]);
         obs.complete();
       });
       component.toBuy();
       fixture.detectChanges();
-      expect(spy).toHaveBeenCalledWith({book : book[0]});
+      expect(spy).toHaveBeenCalledWith({ book: book[0] });
       expect(spy1).toHaveBeenCalledWith(['/billing']);
-
-  }));
-
-
+    }
+  ));
 });

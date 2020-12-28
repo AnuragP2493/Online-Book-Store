@@ -1,10 +1,10 @@
 import { StoreModule } from '@ngrx/store';
-import { BooksFacade } from 'src/app/store/books.fascade';
+import { BooksFacade } from '../../store/books.fascade';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 
 import { CartComponent } from './cart.component';
-import { reducers } from 'src/app/store/books.selector';
+import { reducers } from '../../store/books.selector';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 

@@ -1,27 +1,24 @@
 import { StoreModule } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import { BooksFacade } from 'src/app/store/books.fascade';
+import { BooksFacade } from '../../store/books.fascade';
 import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { SearchBarComponent } from './search-bar.component';
 import { Observable } from 'rxjs';
-import { reducers } from 'src/app/store/books.selector';
+import { reducers } from '../../store/books.selector';
 
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;
   let fixture: ComponentFixture<SearchBarComponent>;
-  let book ;
+  let book;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports : [RouterTestingModule,
-        StoreModule.forRoot(reducers)
-      ],
-      declarations: [ SearchBarComponent ],
-      providers : [BooksFacade ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule, StoreModule.forRoot(reducers)],
+      declarations: [SearchBarComponent],
+      providers: [BooksFacade],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -35,7 +32,7 @@ describe('SearchBarComponent', () => {
         etag: 'sWJBeRbxMK0',
         selfLink: 'https://www.googleapis.com/books/v1/volumes/0BSOg0oHhZ0C',
         volumeInfo: {
-          authors : ['sfs' , 'sfsf'],
+          authors: ['sfs', 'sfsf'],
           title: 'Angular Momentum in Quantum Mechanics',
           publisher: 'Princeton University Press',
           publishedDate: '1996',
@@ -62,7 +59,11 @@ describe('SearchBarComponent', () => {
           canonicalVolumeLink:
             'https://books.google.com/books/about/Angular_Momentum_in_Quantum_Mechanics.html?hl=&id=0BSOg0oHhZ0C',
         },
-        saleInfo: { country: 'IN', saleability: 'NOT_FOR_SALE', isEbook: false },
+        saleInfo: {
+          country: 'IN',
+          saleability: 'NOT_FOR_SALE',
+          isEbook: false,
+        },
         accessInfo: {
           country: 'IN',
           viewability: 'PARTIAL',
@@ -84,8 +85,8 @@ describe('SearchBarComponent', () => {
           textSnippet:
             '<b>Angular</b> Momentum of a System of Particles PRELIMINARY REMARKS . In <br>\nclassical mechanics the <b>angular</b> momentum of a system of n particles relative to a <br>\npoint 0 is given by ( 2.2.1 ) 1 = įt : X : = ΣΙ . where Ii , Pi , and L ; are the position <br>\nvector&nbsp;...',
         },
-      }
-  ];
+      },
+    ];
   });
 
   it('should create', () => {
@@ -95,50 +96,39 @@ describe('SearchBarComponent', () => {
   it('should set all books count', inject(
     [BooksFacade],
     (facade: BooksFacade) => {
-      facade.AllBooks$ = new Observable(obs => {
+      facade.AllBooks$ = new Observable((obs) => {
         obs.next(book);
         obs.complete();
       });
       component.ngOnInit();
       fixture.detectChanges();
-      component.searchData$.subscribe(data => {
+      component.searchData$.subscribe((data) => {
         expect(data).toEqual(book);
       });
+    }
+  ));
 
+  it('should set search Term', inject([BooksFacade], (facade: BooksFacade) => {
+    facade.searchTerm$ = new Observable((obs) => {
+      obs.next('java');
+      obs.complete();
+    });
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(component.searchTerm).toEqual('java');
   }));
 
-  it('should set search Term', inject(
-    [BooksFacade],
-    (facade: BooksFacade) => {
-      facade.searchTerm$ = new Observable(obs => {
-        obs.next('java');
-        obs.complete();
-      });
-      component.ngOnInit();
-      fixture.detectChanges();
-      expect(component.searchTerm).toEqual('java');
-
+  it('should call loadBooks', inject([BooksFacade], (facade: BooksFacade) => {
+    const spy = spyOn(facade, 'loadBooks');
+    component.searchBook('java');
+    fixture.detectChanges();
+    expect(spy).toHaveBeenCalledOnceWith({ searchTerm: 'java' });
   }));
 
-  it('should call loadBooks', inject(
-    [BooksFacade],
-    (facade: BooksFacade) => {
-      const spy = spyOn(facade , 'loadBooks');
-      component.searchBook('java');
-      fixture.detectChanges();
-      expect(spy).toHaveBeenCalledOnceWith({ searchTerm : 'java'});
-
+  it('should navigate to detail page ', inject([Router], (router: Router) => {
+    const spy = spyOn(router, 'navigate');
+    component.onDetail('0BSOg0oHhZ0C');
+    fixture.detectChanges();
+    expect(spy).toHaveBeenCalledOnceWith(['/search/detail', '0BSOg0oHhZ0C']);
   }));
-
-  it('should navigate to detail page ', inject(
-    [Router],
-    (router: Router) => {
-      const spy = spyOn(router , 'navigate');
-      component.onDetail('0BSOg0oHhZ0C');
-      fixture.detectChanges();
-      expect(spy).toHaveBeenCalledOnceWith(['/search/detail' , '0BSOg0oHhZ0C']);
-
-  }));
-
-
 });
