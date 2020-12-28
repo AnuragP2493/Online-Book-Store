@@ -1,0 +1,22 @@
+{
+  "npmScope": "google-books",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
+  },
+  "projects": {
+    "google-books": {
+      "tags": []
+    },
+    "google-books-e2e": {
+      "tags": []
+    }
+  }
+}

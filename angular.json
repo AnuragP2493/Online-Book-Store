@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "",
   "projects": {
     "google-books": {
       "projectType": "application",
@@ -10,26 +10,26 @@
           "style": "scss"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/google-books",
+      "sourceRoot": "apps/google-books/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/google-books",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "outputPath": "dist/apps/google-books",
+            "index": "apps/google-books/src/index.html",
+            "main": "apps/google-books/src/main.ts",
+            "polyfills": "apps/google-books/src/polyfills.ts",
+            "tsConfig": "apps/google-books/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/google-books/src/favicon.ico",
+              "apps/google-books/src/assets"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "apps/google-books/src/styles.scss"
             ],
             "scripts": []
           },
@@ -37,8 +37,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/google-books/src/environments/environment.ts",
+                  "with": "apps/google-books/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -83,17 +83,17 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
+            "main": "apps/google-books/src/test.ts",
+            "polyfills": "apps/google-books/src/polyfills.ts",
+            "tsConfig": "apps/google-books/tsconfig.spec.json",
+            "karmaConfig": "apps/google-books/karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/google-books/src/favicon.ico",
+              "apps/google-books/src/assets"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "apps/google-books/src/styles.scss"
             ],
             "scripts": []
           }
@@ -102,19 +102,24 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "apps/google-books/tsconfig.app.json",
+              "apps/google-books/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
           }
-        },
+        }
+      }
+    },
+    "google-books-e2e": {
+      "projectType": "application",
+      "root": "apps/google-books-e2e",
+      "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
+            "protractorConfig": "apps/google-books-e2e/protractor.conf.js",
             "devServerTarget": "google-books:serve"
           },
           "configurations": {
@@ -122,9 +127,21 @@
               "devServerTarget": "google-books:serve:production"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/google-books-e2e/tsconfig.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "google-books"
+  "defaultProject": "google-books",
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  }
 }
