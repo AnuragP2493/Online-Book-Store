@@ -10,7 +10,6 @@ import {
   inject,
 } from '@angular/core/testing';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-
 import { BillingComponent } from './billing.component';
 import { Router } from '@angular/router';
 

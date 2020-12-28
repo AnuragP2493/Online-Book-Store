@@ -2,7 +2,6 @@ import { StoreModule } from '@ngrx/store';
 import { BooksFacade } from '../../store/books.fascade';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
-
 import { BookDetailComponent } from './book-detail.component';
 import { reducers } from '../../store/books.selector';
 import { Observable, of } from 'rxjs';
