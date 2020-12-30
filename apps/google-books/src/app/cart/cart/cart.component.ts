@@ -1,3 +1,4 @@
+import { Cart } from './../../store/cart.reducer';
 import { Observable } from 'rxjs';
 import { BooksFacade } from '../../store/books.fascade';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +11,7 @@ import { Book } from '../../shared/search.interface';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  cartItems$: Observable<Book[]>;
+  cartItems$: Observable<Cart[]>;
   constructor(private bookFascade: BooksFacade, private router: Router) {}
 
   ngOnInit(): void {

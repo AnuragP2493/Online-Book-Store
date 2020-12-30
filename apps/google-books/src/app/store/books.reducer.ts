@@ -6,7 +6,6 @@ export interface State {
   User: User;
   AllBooks: Book[];
   loaded: boolean;
-  cartItems: Book[];
   collectionItems: Book[];
   searchTerm: string;
 }
@@ -24,7 +23,6 @@ export const initialState: State = {
   User: initalUser,
   AllBooks: [],
   loaded: false,
-  cartItems: [],
   collectionItems: [],
   searchTerm: '',
 };
@@ -42,26 +40,12 @@ const scoreboardReducer = createReducer(
     searchTerm: action.searchTerm,
   })),
 
-  on(bookActions.addedToCart, (state, action) => {
-    return Object.assign({
-      ...state,
-      cartItems: [...state.cartItems, action.book],
-    });
-  }),
-
   on(bookActions.addedToCollection, (state, action) => ({
     ...state,
     collectionItems: [...state.collectionItems, action.book],
   })),
 
-  on(bookActions.addUser, (state, action) => ({ ...state, User: action.user })),
-
-  on(bookActions.removeFromCart, (state, action) => {
-    return Object.assign({
-      ...state,
-      cartItems: state.cartItems.filter((items) => items.id !== action.id),
-    });
-  })
+  on(bookActions.addUser, (state, action) => ({ ...state, User: action.user }))
 );
 
 export function reducer(state: State | undefined, action: Action): any {

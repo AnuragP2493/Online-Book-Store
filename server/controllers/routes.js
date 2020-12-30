@@ -14,7 +14,8 @@ router.get('/books/:id', (req, res) => {
         headers: { 'Content-Type': 'application/json' },
     })
     .then(res => res.json())
-    .then(json => res.send(json));
+    .then(json => res.send(json))
+    .catch(err => console.log(err))
 
 })
 

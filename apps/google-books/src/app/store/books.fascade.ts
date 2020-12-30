@@ -1,8 +1,10 @@
+import { Cart } from './cart.reducer';
 import { Book } from '../shared/search.interface';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as booksSelector from './books.selector';
+import * as cartSeletor from './cart.selector';
 import {
   loadBooks,
   removeFromCart,
@@ -10,6 +12,7 @@ import {
   addedToCollection,
   addUser,
 } from './books.actions';
+import * as cartAction from './cart.action';
 
 @Injectable()
 export class BooksFacade {
@@ -18,8 +21,8 @@ export class BooksFacade {
   AllBooks$ = this.store.select(booksSelector.selectAllBooks) as Observable<
     Book[]
   >;
-  cartItems$ = this.store.select(booksSelector.selectCartItem) as Observable<
-    Book[]
+  cartItems$ = this.store.select(cartSeletor.selectAllBooks) as Observable<
+    Cart[]
   >;
   collectionItem$ = this.store.select(
     booksSelector.selectCollectionItem
@@ -35,7 +38,8 @@ export class BooksFacade {
   }
 
   addToCart(book): void {
-    this.store.dispatch(addedToCart(book));
+    // this.store.dispatch(addedToCart(book));
+    this.store.dispatch(cartAction.addBook(book));
   }
 
   addToCollection(book): void {
@@ -47,6 +51,7 @@ export class BooksFacade {
   }
 
   removeFromCart(id): void {
-    this.store.dispatch(removeFromCart({ id }));
+    this.store.dispatch(cartAction.deleteUser({ id }));
+    // this.store.dispatch(removeFromCart({ id }));
   }
 }
