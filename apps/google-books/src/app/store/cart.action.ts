@@ -5,7 +5,7 @@ import { Cart } from './cart.reducer';
 
 export const addBook = createAction(
   '[User/API] Added to cart',
-  props<{ book: Cart }>()
+  props<{ book: Book }>()
 );
 export const deleteUser = createAction(
   '[User/API] Removed from cart',

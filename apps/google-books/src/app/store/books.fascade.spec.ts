@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { reducers } from './books.selector';
 import { Observable, of } from 'rxjs';
 import * as fromAction from './books.actions';
+import * as cartAction from './cart.action';
 
 describe('bookFascade', () => {
   let facade: BooksFacade;
@@ -100,9 +101,7 @@ describe('bookFascade', () => {
   it('should be add to cart action', () => {
     const spy = spyOn(store, 'dispatch');
     facade.addToCart({ book: book[0] });
-    expect(spy).toHaveBeenCalledOnceWith(
-      fromAction.addedToCart({ book: book[0] })
-    );
+    expect(spy).toHaveBeenCalledOnceWith(cartAction.addBook({ book: book[0] }));
   });
 
   it('should be add to collection action', () => {
@@ -117,7 +116,7 @@ describe('bookFascade', () => {
     const spy = spyOn(store, 'dispatch');
     facade.removeFromCart('0BSOg0oHhZ0C');
     expect(spy).toHaveBeenCalledOnceWith(
-      fromAction.removeFromCart({ id: '0BSOg0oHhZ0C' })
+      cartAction.deleteUser({ id: '0BSOg0oHhZ0C' })
     );
   });
 

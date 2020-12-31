@@ -3,8 +3,8 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as cartActions from './cart.action';
 export interface Cart {
-  id: string;
-  book: Book;
+  id?: string;
+  book?: Book;
 }
 
 export interface State extends EntityState<Cart> {

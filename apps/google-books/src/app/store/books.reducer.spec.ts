@@ -1,5 +1,7 @@
 import * as fromReducer from './books.reducer';
 import * as fromAction from './books.actions';
+import * as cartReducer from './cart.reducer';
+import * as cartAction from './cart.action';
 import { BooksFacade } from './books.fascade';
 
 import { TestBed } from '@angular/core/testing';
@@ -109,21 +111,6 @@ describe('ngrx-store', () => {
     const state = fromReducer.reducer(initialState, action);
 
     expect(state.cartItems).not.toBe(null);
-  });
-
-  it('should remove the book from colletion', () => {
-    const initialState = {
-      User: initialUser,
-      AllBooks: [],
-      loaded: false,
-      cartItems: [book[0]],
-      collectionItems: [],
-      searchTerm: '',
-    };
-    const action = fromAction.removeFromCart({ id: '0BSOg0oHhZ0C' });
-    const state = fromReducer.reducer(initialState, action);
-
-    expect(state.cartItems).toEqual([]);
   });
 
   it('should add the item to collection', () => {

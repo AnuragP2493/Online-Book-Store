@@ -1,17 +1,11 @@
 import { Cart } from './cart.reducer';
 import { Book } from '../shared/search.interface';
 import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as booksSelector from './books.selector';
 import * as cartSeletor from './cart.selector';
-import {
-  loadBooks,
-  removeFromCart,
-  addedToCart,
-  addedToCollection,
-  addUser,
-} from './books.actions';
+import { loadBooks, addedToCollection, addUser } from './books.actions';
 import * as cartAction from './cart.action';
 
 @Injectable()
@@ -33,12 +27,10 @@ export class BooksFacade {
   User$ = this.store.select(booksSelector.selectUser) as Observable<any>;
 
   loadBooks(payload): void {
-    // payload.toString();
     this.store.dispatch(loadBooks(payload));
   }
 
   addToCart(book): void {
-    // this.store.dispatch(addedToCart(book));
     this.store.dispatch(cartAction.addBook(book));
   }
 
@@ -52,6 +44,5 @@ export class BooksFacade {
 
   removeFromCart(id): void {
     this.store.dispatch(cartAction.deleteUser({ id }));
-    // this.store.dispatch(removeFromCart({ id }));
   }
 }
