@@ -1,13 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "experimentalDecorators": true,
-    "outDir": "../../dist/out-tsc",
-    "module": "commonjs",
-    "target": "es2018",
-    "types": [
-      "jasmine",
-      "node"
-    ]
-  }
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.e2e.json"
+    }
+  ]
 }

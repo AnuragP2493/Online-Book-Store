@@ -6,6 +6,7 @@ import { CartComponent } from './cart.component';
 import { reducers } from '../../store/books.selector';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('CartComponent', () => {
   let component: CartComponent;
@@ -17,6 +18,7 @@ describe('CartComponent', () => {
       imports: [RouterTestingModule, StoreModule.forRoot(reducers)],
       declarations: [CartComponent],
       providers: [BooksFacade],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
@@ -114,8 +116,8 @@ describe('CartComponent', () => {
       const spy = spyOn(facade, 'addToCollection');
       component.toBuy(book[0]);
       fixture.detectChanges();
-      expect(spy).toHaveBeenCalledWith({ book: book[0] });
-      expect(spy1).toHaveBeenCalledWith(['/billing']);
+      expect(spy).toBeCalledWith({ book: book[0] });
+      expect(spy1).toBeCalledWith(['/billing']);
     }
   ));
 
@@ -123,6 +125,6 @@ describe('CartComponent', () => {
     const spy = spyOn(facade, 'removeFromCart');
     component.RemoveCart('0BSOg0oHhZ0C');
     fixture.detectChanges();
-    expect(spy).toHaveBeenCalledWith('0BSOg0oHhZ0C');
+    expect(spy).toBeCalledWith('0BSOg0oHhZ0C');
   }));
 });

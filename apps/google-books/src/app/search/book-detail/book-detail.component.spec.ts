@@ -6,6 +6,7 @@ import { BookDetailComponent } from './book-detail.component';
 import { reducers } from '../../store/books.selector';
 import { Observable, of } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('BookDetailComponent', () => {
   let component: BookDetailComponent;
@@ -16,6 +17,7 @@ describe('BookDetailComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, StoreModule.forRoot(reducers)],
       declarations: [BookDetailComponent],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         BooksFacade,
         {
@@ -123,7 +125,7 @@ describe('BookDetailComponent', () => {
     });
     component.addToCart();
     fixture.detectChanges();
-    expect(spy).toHaveBeenCalledWith({ book: book[0] });
+    expect(spy).toBeCalledWith({ book: book[0] });
   }));
 
   it('on buy should navigate to biling and add it to collection', inject(
@@ -137,8 +139,8 @@ describe('BookDetailComponent', () => {
       });
       component.toBuy();
       fixture.detectChanges();
-      expect(spy).toHaveBeenCalledWith({ book: book[0] });
-      expect(spy1).toHaveBeenCalledWith(['/billing']);
+      expect(spy).toBeCalledWith({ book: book[0] });
+      expect(spy1).toBeCalledWith(['/billing']);
     }
   ));
 });

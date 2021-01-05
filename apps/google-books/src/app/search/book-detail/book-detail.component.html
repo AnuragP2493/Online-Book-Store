@@ -1,20 +1,20 @@
 <mat-card *ngIf="selectedBook$ |async as selectedBook">
     <mat-card-header>
-      <mat-card-title>{{selectedBook.volumeInfo?.title}}</mat-card-title>
+      <mat-card-title>{{selectedBook?.title}}</mat-card-title>
     </mat-card-header>
-    <img mat-card-image src="{{selectedBook.volumeInfo.imageLinks?.smallThumbnail}}">
+    <img mat-card-image src="{{selectedBook?.imageLinks}}">
     <div>
-       <p>Rating: {{selectedBook.volumeInfo.averageRating}}</p>
-        <p>Publisher: {{selectedBook.volumeInfo.publisher}}</p>
-        <p>Page Count: {{selectedBook.volumeInfo.pageCount}}</p>
-        <p>Language: {{selectedBook.volumeInfo.language}}</p>
+       <p>Rating: {{selectedBook.averageRating}}</p>
+        <p>Publisher: {{selectedBook.publisher}}</p>
+        <p>Page Count: {{selectedBook.pageCount}}</p>
+        <p>Language: {{selectedBook.language}}</p>
     </div>
     <mat-card-content>
       <p>
-        {{selectedBook.volumeInfo.description}}
+        {{selectedBook.description}}
       </p>
       <p>Written By: </p>
-      <p>{{selectedBook.volumeInfo.publisher}}</p>
+      <p>{{selectedBook.publisher}}</p>
 
       <br>
       

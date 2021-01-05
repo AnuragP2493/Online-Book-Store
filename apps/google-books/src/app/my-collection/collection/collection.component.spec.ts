@@ -4,6 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { CollectionComponent } from './collection.component';
 import { Observable } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('CollectionComponent', () => {
   let component: CollectionComponent;
@@ -16,6 +17,7 @@ describe('CollectionComponent', () => {
       imports: [StoreModule.forRoot(reducers)],
       declarations: [CollectionComponent],
       providers: [BooksFacade],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 

@@ -9,19 +9,18 @@ export interface User {
   email: string;
   mobile: string;
   address: string;
-
-
 }
 
 export interface Book {
-  kind: string;
   id: string;
-  etag: string;
-  selfLink: string;
-  volumeInfo: VolumeInfo;
-  saleInfo: SaleInfo;
-  accessInfo: AccessInfo;
-  searchInfo?: SearchInfo;
+  title: string;
+  authors: string[];
+  description: string;
+  publisher: string;
+  averageRating: number;
+  imageLinks: string;
+  pageCount: number;
+  language: string;
 }
 
 export interface SearchInfo {

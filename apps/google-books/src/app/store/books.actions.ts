@@ -8,7 +8,7 @@ export const loadBooks = createAction(
 
 export const booksLoaded = createAction(
   '[Load Books] Search',
-  props<{ books: Book[] }>()
+  props<{ books: any[] }>()
 );
 
 export const addedToCart = createAction(

@@ -12,6 +12,7 @@ import {
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BillingComponent } from './billing.component';
 import { Router } from '@angular/router';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('BillingComponent', () => {
   let component: BillingComponent;
@@ -26,6 +27,7 @@ describe('BillingComponent', () => {
       ],
       declarations: [BillingComponent],
       providers: [BooksFacade],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
@@ -48,13 +50,13 @@ describe('BillingComponent', () => {
     tick(2500);
     fixture.detectChanges();
     fixture.whenStable().then(() => {
-      expect(spy).toHaveBeenCalledOnceWith(['/collection']);
+      expect(spy).toBeCalledWith(['/collection']);
       expect(spy1);
     });
   }));
 
   it('fetch error method should fetch all error ', () => {
-    const name = component.customerFrom.controls.name;
+    const name = component?.customerFrom.controls.name;
     expect(name.valid).toBeFalsy();
 
     name.setValue('');

@@ -6,6 +6,7 @@ import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { SearchBarComponent } from './search-bar.component';
 import { Observable } from 'rxjs';
 import { reducers } from '../../store/books.selector';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;
@@ -17,6 +18,7 @@ describe('SearchBarComponent', () => {
       imports: [RouterTestingModule, StoreModule.forRoot(reducers)],
       declarations: [SearchBarComponent],
       providers: [BooksFacade],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
@@ -121,13 +123,13 @@ describe('SearchBarComponent', () => {
     const spy = spyOn(facade, 'loadBooks');
     component.searchBook('java');
     fixture.detectChanges();
-    expect(spy).toHaveBeenCalledOnceWith({ searchTerm: 'java' });
+    expect(spy).toBeCalledWith({ searchTerm: 'java' });
   }));
 
   it('should navigate to detail page ', inject([Router], (router: Router) => {
     const spy = spyOn(router, 'navigate');
     component.onDetail('0BSOg0oHhZ0C');
     fixture.detectChanges();
-    expect(spy).toHaveBeenCalledOnceWith(['/search/detail', '0BSOg0oHhZ0C']);
+    expect(spy).toBeCalledWith(['/search/detail', '0BSOg0oHhZ0C']);
   }));
 });
