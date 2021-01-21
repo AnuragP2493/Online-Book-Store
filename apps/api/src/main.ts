@@ -1,8 +1,9 @@
-const express = require('express');
+import * as express from 'express';
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const app = express();
-const route = require('./controllers/routes');
+export const app = express();
+// const route = require('./controllers/routes');
+import { router as bookRoute } from '../src/routes/routes';
 
 var corsOptions = {
   origin: 'http://localhost:4200',
@@ -15,7 +16,7 @@ app.get('/', (req, res) => {
   res.send({ msg: 'server started listing ' });
 });
 
-app.use('/api', route);
+app.use('/api', bookRoute);
 
 const Port = process.env.PORT || 5000;
 
